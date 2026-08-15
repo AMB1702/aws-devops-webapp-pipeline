@@ -1,0 +1,49 @@
+name: CD Application Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install app dependencies
+        run: |
+          cd app
+          pip install -r requirements.txt
+
+      - name: Zip the app
+        run: |
+          zip -r app.zip app/
+
+      - name: Upload to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "app.zip"
+          target: "/home/${{ secrets.EC2_USER }}/app.zip"
+
+      - name: Restart app on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo systemctl stop flaskapp
+            sudo rm -rf /var/www/flaskapp/*
+            sudo unzip /home/${{ secrets.EC2_USER }}/app.zip -d /var/www/flaskapp/
+            sudo systemctl start flaskapp
