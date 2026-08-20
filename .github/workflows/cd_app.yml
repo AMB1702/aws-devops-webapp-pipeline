@@ -3,6 +3,8 @@ name: CD Application Pipeline
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'app/**'
   workflow_dispatch:
 
 jobs:

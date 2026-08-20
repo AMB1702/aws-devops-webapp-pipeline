@@ -3,6 +3,9 @@ name: CD Combined Pipeline
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'terraform/**'
   workflow_dispatch:
 
 jobs:

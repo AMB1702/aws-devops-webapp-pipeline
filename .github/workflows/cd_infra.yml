@@ -3,6 +3,8 @@ name: CD Infrastructure Pipeline
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'terraform/**'
   workflow_dispatch:
 
 jobs:
