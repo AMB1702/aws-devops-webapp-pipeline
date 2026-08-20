@@ -60,8 +60,8 @@ resource "aws_security_group" "web_sg" {
 }
 
 resource "aws_instance" "web" {
-  ami                    = "ami-0c1c30571d2dae5c5" # Amazon Linux 2 (eu-west-2)
-  instance_type          = var.instance_type
+  ami                    = "resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-kernel-default-hvm-x86_64-gp2"
+  instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
@@ -70,5 +70,4 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.project_name
   }
-}"# trigger infra" 
-"# trigger infra" 
+}

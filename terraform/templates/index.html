@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Demo App</title>
+</head>
+<body>
+    <h1>Welcome to the DevOps Demo App</h1>
+    <form method="POST">
+        <label>Enter your name:</label>
+        <input type="text" name="name">
+        <button type="submit">Submit</button>
+    </form>
+    {% if name %}
+        <p>Hello {{ name }}! Your application deployed successfully.</p>
+    {% endif %}
+</body>
+</html>

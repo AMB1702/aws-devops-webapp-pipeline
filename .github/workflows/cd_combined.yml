@@ -6,7 +6,6 @@ on:
     paths:
       - 'app/**'
       - 'terraform/**'
-  workflow_dispatch:
 
 jobs:
   terraform-plan:
