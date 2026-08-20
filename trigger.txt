@@ -1,0 +1,1 @@
+"trigger $(date /t) $(time /t)" 
