@@ -70,4 +70,4 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.project_name
   }
-}
+}"# trigger infra" 
