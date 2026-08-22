@@ -39,6 +39,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install zip
+        run: sudo apt-get update && sudo apt-get install -y zip
+
       - name: Zip app
         run: zip -r app.zip app/
 
@@ -62,6 +65,7 @@ jobs:
             sudo rm -rf /var/www/flaskapp/*
             sudo unzip /home/${{ secrets.EC2_USER }}/app.zip -d /var/www/flaskapp/
             sudo systemctl start flaskapp
+
 
       - name: Monitoring - CloudWatch Agent Status
         uses: appleboy/ssh-action@v0.1.7
