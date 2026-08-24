@@ -11,7 +11,6 @@ def test_homepage_loads():
     assert response.status_code == 200
 
 
-
 def test_version_text_present():
     """
     Ensures the updated application text is rendered on the homepage.
