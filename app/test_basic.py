@@ -1,5 +1,6 @@
 from app import app
 
+
 def test_homepage_loads():
     """
     Basic sanity test to ensure the Flask application loads
@@ -8,6 +9,7 @@ def test_homepage_loads():
     client = app.test_client()
     response = client.get("/")
     assert response.status_code == 200
+
 
 
 def test_version_text_present():
